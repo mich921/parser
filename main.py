@@ -11,6 +11,7 @@ class WebPage:
         self.title = ''
         self.text = ''
 
+    # парсим саму страничку
     def fetch(self):
         try:
             response = urllib.request.urlopen(self.url)
@@ -37,7 +38,7 @@ class WebPage:
         del_rubbish = re.sub(r'<style(.*?)>(.*?)</style>', '', del_rubbish, flags=re.DOTALL)
         del_rubbish = re.sub(r'<nostyle(.*?)>(.*?)</nostyle>', '', del_rubbish, flags=re.DOTALL)
         del_rubbish = re.sub(r'<iframe(.*?)>(.*?)</iframe>', '', del_rubbish, flags=re.DOTALL)
-        # Удаляем спец. символов HTML
+        # Заменяем спец. символов HTML
         del_rubbish = html.unescape(del_rubbish)
 
         # Форматируем текст
@@ -46,6 +47,7 @@ class WebPage:
         self.text = re.sub(r'\n+', '\n', self.text)  # заменяем множественные пробелы на один
         self.text = re.sub(r'(\S{20})\s', r'\1\n', self.text)  # переносим строки по словам
 
+    # запись в файл
     def save_to_file(self, file_path):
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(self.title + '\n\n')

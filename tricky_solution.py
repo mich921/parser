@@ -2,6 +2,7 @@ import urllib.request
 import html2text
 
 
+# TODO решение задачи, но с использованием сторонней библиотеки
 class HTMLtoMD:
     def __init__(self, url, file_path):
         self.url = url
