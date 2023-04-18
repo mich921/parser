@@ -42,8 +42,7 @@ class WebPage:
         del_rubbish = html.unescape(del_rubbish)
 
         # Форматируем текст
-        self.text = re.sub(r'<.*?>', '', del_rubbish)  # удаляем теги HTML
-        # TODO: я не понимаю почему на этом моменте он не всегда удаляет теги
+        self.text = re.sub(r'<.*?>', '', del_rubbish, flags=re.DOTALL)  # удаляем теги HTML
         self.text = re.sub(r'\n+', '\n', self.text)  # заменяем множественные пробелы на один
         self.text = re.sub(r'(\S{20})\s', r'\1\n', self.text)  # переносим строки по словам
 
